@@ -1,25 +1,39 @@
 ;; Packages I always want to have
-(setq package-list '(cyberpunk-theme
+(setq package-list '(ein
+		     cyberpunk-theme
 		     markdown-mode
 		     ido-ubiquitous
 		     rainbow-mode
+		     magit
+		     nyan-mode
 		     monokai-theme
 		     reykjavik-theme))
 ;; melpa
 (require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives 
+            '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
+
+;; ORG
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files (list "~/org/personal.org"))
 
 ;; Download packages that aren't installed
 (unless package-archive-contents
   (package-refresh-contents))
 (dolist (package package-list)
   (unless (package-installed-p package)
+    (message "Hey, it seems you're missing some packages. gonna download them for you now.")
     (package-install package)))
+
+;; nice to have imo
+(global-linum-mode t)
 
 ;; So much ido
 (ido-mode 1)
@@ -27,6 +41,22 @@
 
 ;; Custom key bindings
 (global-set-key (kbd "C-x C-m") 'compile)
+
+;; ipython
+;; (require 'ein)
+
+;; hehe
+(nyan-mode t)
+;; ipython(
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i")
+(setq-default py-shell-name "ipython")
+(setq-default py-which-bufname "IPython")
+					; use the wx backend, for both mayavi and matplotlib
+(setq py-python-command-args
+      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+(setq py-force-py-shell-name-p t)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -36,10 +66,10 @@
  '(ansi-color-names-vector
    ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
  '(compilation-message-face (quote default))
- '(custom-enabled-themes (quote (reykjavik)))
+ '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-    ("01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "557c283f4f9d461f897b8cac5329f1f39fac785aa684b78949ff329c33f947ec" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default)))
+    ("8ed752276957903a270c797c4ab52931199806ccd9f0c3bb77f6f4b9e71b9272" "a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "01ce486c3a7c8b37cf13f8c95ca4bb3c11413228b35676025fdf239e77019ea1" "557c283f4f9d461f897b8cac5329f1f39fac785aa684b78949ff329c33f947ec" "71ecffba18621354a1be303687f33b84788e13f40141580fa81e7840752d31bf" default)))
  '(fci-rule-color "#20240E")
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
