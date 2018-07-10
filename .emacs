@@ -75,6 +75,7 @@
                             'color-theme-kingsajz 'color-theme-shaman
                             'color-theme-subtle-blue 'color-theme-snowish
                             'color-theme-sitaramv-nt 'color-theme-wheat))
+(color-theme-initialize)
 
 (defun random-color-theme ()
   (interactive)
