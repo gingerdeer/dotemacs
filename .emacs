@@ -94,6 +94,24 @@
 
  (define-key global-map (kbd "C-x p") 'prev-window)
 
+;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
+(add-to-list 'load-path "C:/slime-2.22")
+(require 'slime)
+(slime-setup)
+
+;; spotify (?)
+
+(defun pl-transparency (value)
+  "Set the transparency of the frame window.
+Argument VALUE 0 is transparent, 100 is opaque."
+  (interactive "nTransparency Value (0 - 100): ")
+  (set-frame-parameter (selected-frame) 'alpha value))
+
+(pl-transparency 75)
+(menu-bar-mode -1)
+(define-key global-map (kbd "C-c C-o -") (lambda () (interactive) (pl-transparency 75)))
+(define-key global-map (kbd "C-c C-o +") (lambda () (interactive) (pl-transparency 100)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -130,7 +148,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#a7a6d4" "#9796c4" "#b48ead")))
  '(package-selected-packages
    (quote
-    (color-theme color-theme-approximate afternoon-theme ample-zen-theme atom-dark-theme autumn-light-theme dakrone-theme doneburn-theme espresso-theme forest-blue-theme lavender-theme srcery-theme sunburn-theme zen-and-art-theme zenburn-theme json-reformat ido-ubiquitous haskell-mode reykjavik-theme monokai-theme nyan-mode magit rainbow-mode markdown-mode ein cyberpunk-theme)))
+    (counsel-spotify ivy color-theme color-theme-approximate afternoon-theme ample-zen-theme atom-dark-theme autumn-light-theme dakrone-theme doneburn-theme espresso-theme forest-blue-theme lavender-theme srcery-theme sunburn-theme zen-and-art-theme zenburn-theme json-reformat ido-ubiquitous haskell-mode reykjavik-theme monokai-theme nyan-mode magit rainbow-mode markdown-mode ein cyberpunk-theme)))
  '(pdf-view-midnight-colors (quote ("#dedded" . "#4A4159")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
@@ -156,7 +174,7 @@
      (320 . "#2896B5")
      (340 . "#2790C3")
      (360 . "#66D9EF"))))
- '(vc-annotate-very-old-color nil)
+ '(vc-annotate-very-old-color nil t)
  '(weechat-color-list
    (unspecified "#272822" "#20240E" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 (custom-set-faces
